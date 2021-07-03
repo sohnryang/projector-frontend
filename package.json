@@ -1,0 +1,9 @@
+{
+  "name": "projector-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:sohnryang/projector-frontend.git",
+  "author": "Ryang Sohn <loop.infinitely@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
