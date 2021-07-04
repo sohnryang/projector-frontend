@@ -1,7 +1,13 @@
-import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
+import {
+  Button,
+  createStyles,
+  makeStyles,
+  Theme,
+  Typography,
+} from "@material-ui/core";
 import MainAppBar from "./MainAppBar";
 import PropTypes, { InferProps } from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Post } from "../post";
@@ -46,6 +52,7 @@ export default function PostView({
     }
     getPost();
   }, [token, id]);
+  const { push } = useHistory();
   return (
     <>
       <MainAppBar />
@@ -59,7 +66,9 @@ export default function PostView({
             __html: xss(marked(post.content === undefined ? "" : post.content)),
           }}
         ></div>
-        <Link to="/">목록으로 돌아가기</Link>
+        <Button variant="contained" onClick={() => push("/")}>
+          목록으로 돌아가기
+        </Button>
       </main>
     </>
   );
