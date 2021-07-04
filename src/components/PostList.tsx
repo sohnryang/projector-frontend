@@ -1,5 +1,6 @@
 import {
   createStyles,
+  Fab,
   makeStyles,
   Table,
   TableBody,
@@ -9,12 +10,13 @@ import {
   TableRow,
   Theme,
 } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
 import PropTypes, { InferProps } from "prop-types";
 import MainAppBar from "./MainAppBar";
 import { Post } from "../post";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import xss from "xss";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,6 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(2),
+    },
+    fab: {
+      position: "absolute",
+      bottom: theme.spacing(3),
+      right: theme.spacing(3),
     },
   })
 );
@@ -65,6 +72,7 @@ export default function PostList({
     getPostList();
   }, [token]);
   const classes = useStyles();
+  const { push } = useHistory();
   return (
     <>
       <MainAppBar />
@@ -94,6 +102,14 @@ export default function PostList({
             </TableBody>
           </Table>
         </TableContainer>
+        <Fab
+          className={classes.fab}
+          color="secondary"
+          aria-label="new post"
+          onClick={() => push("/write")}
+        >
+          <EditIcon />
+        </Fab>
       </main>
     </>
   );

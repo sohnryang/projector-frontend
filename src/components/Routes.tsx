@@ -1,5 +1,6 @@
 import PropTypes, { InferProps } from "prop-types";
 import { Route, Switch } from "react-router-dom";
+import EditorView from "./EditorView";
 import PostList from "./PostList";
 import PostView from "./PostView";
 
@@ -14,6 +15,11 @@ export default function Routes({
         exact
         path="/post/:postId"
         render={() => <PostView token={token} />}
+      />
+      <Route
+        exact
+        path="/write"
+        render={() => <EditorView token={token} userId={userId} />}
       />
     </Switch>
   );
