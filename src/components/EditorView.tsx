@@ -143,6 +143,13 @@ export default function EditorView({
         >
           Post
         </Button>
+        <Button
+          className={classes.formControl}
+          variant="contained"
+          onClick={() => push("/")}
+        >
+          Cancel
+        </Button>
       </main>
     </>
   );
