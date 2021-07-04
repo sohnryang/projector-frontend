@@ -10,7 +10,7 @@ export default function LoginPage({
   const handleResponse = (response: any) => {
     axios
       .post(`${process.env.REACT_APP_API_URI}/auth/signin`, response)
-      .then((response: any) => setToken(response["access_token"]));
+      .then((response: any) => setToken(response.data["access_token"]));
   };
 
   if (token !== "") return <Redirect to="/" />;
