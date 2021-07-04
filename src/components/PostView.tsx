@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Post } from "../post";
+import xss from "xss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,11 +35,11 @@ export default function PostView({
       );
       setPost({
         id: id,
-        title: res.data["title"],
-        projectName: res.data["project_name"],
-        authorName: res.data["author_name"],
-        creationDate: res.data["creation_date"],
-        content: res.data["content"],
+        title: xss(res.data["title"]),
+        projectName: xss(res.data["project_name"]),
+        authorName: xss(res.data["author_name"]),
+        creationDate: xss(res.data["creation_date"]),
+        content: xss(res.data["content"]),
       });
     }
     getPost();
