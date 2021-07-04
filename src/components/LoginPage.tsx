@@ -6,14 +6,19 @@ import { Redirect } from "react-router-dom";
 export default function LoginPage({
   token,
   setToken,
+  userId,
+  setUserId,
 }: InferProps<typeof LoginPage.propTypes>) {
   const handleResponse = (response: any) => {
     axios
       .post(`${process.env.REACT_APP_API_URI}/auth/signin`, response)
-      .then((response: any) => setToken(response.data["access_token"]));
+      .then((response: any) => {
+        setToken(response.data["access_token"]);
+        setUserId(response.data["user_id"]);
+      });
   };
 
-  if (token !== "") return <Redirect to="/" />;
+  if (token !== "" && userId !== 0) return <Redirect to="/" />;
 
   return (
     <GoogleLogin
@@ -27,4 +32,6 @@ export default function LoginPage({
 LoginPage.propTypes = {
   token: PropTypes.string.isRequired,
   setToken: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  setUserId: PropTypes.func.isRequired,
 };

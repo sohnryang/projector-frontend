@@ -14,16 +14,28 @@ const theme = createMuiTheme({
 
 function App() {
   const [token, setToken] = React.useState("");
+  const [userId, setUserId] = React.useState(0);
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Route
           path="/login"
-          render={() => <LoginPage token={token} setToken={setToken} />}
+          render={() => (
+            <LoginPage
+              token={token}
+              setToken={setToken}
+              userId={userId}
+              setUserId={setUserId}
+            />
+          )}
         />
         <Route
           render={() =>
-            token === "" ? <Redirect to="/login" /> : <Routes token={token} />
+            token === "" || userId === 0 ? (
+              <Redirect to="/login" />
+            ) : (
+              <Routes token={token} userId={userId} />
+            )
           }
         />
       </Router>
