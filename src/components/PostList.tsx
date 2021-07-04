@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Post {
+  id: number;
   title: String;
   projectName: String;
   authorName: String;
@@ -55,6 +56,7 @@ export default function PostList({
       setPostList(
         res.data.map((responseItem: any) => {
           return {
+            id: responseItem["post_id"],
             title: responseItem["title"],
             projectName: responseItem["project_name"],
             authorName: responseItem["author_name"],
@@ -83,7 +85,7 @@ export default function PostList({
             </TableHead>
             <TableBody>
               {postList.map((post) => (
-                <TableRow hover>
+                <TableRow hover key={post.id}>
                   <TableCell component="th" scope="row">
                     {post.title}
                   </TableCell>
