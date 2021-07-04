@@ -15,6 +15,7 @@ import { Post } from "../post";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import xss from "xss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,10 +52,10 @@ export default function PostList({
         res.data.map((responseItem: any) => {
           return {
             id: responseItem["post_id"],
-            title: responseItem["title"],
-            projectName: responseItem["project_name"],
-            authorName: responseItem["author_name"],
-            creationDate: responseItem["creation_date"],
+            title: xss(responseItem["title"]),
+            projectName: xss(responseItem["project_name"]),
+            authorName: xss(responseItem["author_name"]),
+            creationDate: xss(responseItem["creation_date"]),
             content: "",
           };
         })
