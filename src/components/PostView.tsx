@@ -1,11 +1,12 @@
 import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
 import MainAppBar from "./MainAppBar";
 import PropTypes, { InferProps } from "prop-types";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Post } from "../post";
 import xss from "xss";
+import marked from "marked";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,7 +53,12 @@ export default function PostView({
         <Typography variant="subtitle1">
           {post.projectName} | {post.authorName} | {post.creationDate}
         </Typography>
-        <Typography variant="body1">{post.content}</Typography>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: xss(marked(post.content == undefined ? "" : post.content)),
+          }}
+        ></div>
+        <Link to="/">목록으로 돌아가기</Link>
       </main>
     </>
   );
