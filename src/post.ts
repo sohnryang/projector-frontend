@@ -1,8 +1,8 @@
 export interface Post {
   id: number;
-  title: String;
-  projectName: String;
-  authorName: String;
-  creationDate: String;
-  content: String;
+  title: string;
+  projectName: string;
+  authorName: string;
+  creationDate: string;
+  content: string;
 }
