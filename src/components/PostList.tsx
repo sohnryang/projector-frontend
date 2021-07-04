@@ -54,6 +54,7 @@ export default function PostList({
             id: responseItem["post_id"],
             title: xss(responseItem["title"]),
             projectName: xss(responseItem["project_name"]),
+            authorId: responseItem["author_id"],
             authorName: xss(responseItem["author_name"]),
             creationDate: xss(responseItem["creation_date"]),
             content: "",

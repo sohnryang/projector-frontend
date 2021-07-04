@@ -38,6 +38,7 @@ export default function PostView({
         id: id,
         title: xss(res.data["title"]),
         projectName: xss(res.data["project_name"]),
+        authorId: res.data["author_id"],
         authorName: xss(res.data["author_name"]),
         creationDate: xss(res.data["creation_date"]),
         content: xss(res.data["content"]),
