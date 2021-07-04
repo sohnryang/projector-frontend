@@ -54,6 +54,7 @@ export default function PostList({
             projectName: responseItem["project_name"],
             authorName: responseItem["author_name"],
             creationDate: responseItem["creation_date"],
+            content: "",
           };
         })
       );

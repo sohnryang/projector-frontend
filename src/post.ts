@@ -4,4 +4,5 @@ export interface Post {
   projectName: String;
   authorName: String;
   creationDate: String;
+  content: String;
 }
