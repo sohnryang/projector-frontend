@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import PropTypes, { InferProps } from "prop-types";
 import MainAppBar from "./MainAppBar";
+import { Post } from "../post";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -22,14 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-interface Post {
-  id: number;
-  title: String;
-  projectName: String;
-  authorName: String;
-  creationDate: String;
-}
 
 interface HeadCell {
   id: keyof Post;
