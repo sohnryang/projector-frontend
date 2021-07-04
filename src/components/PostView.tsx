@@ -56,7 +56,7 @@ export default function PostView({
         </Typography>
         <div
           dangerouslySetInnerHTML={{
-            __html: xss(marked(post.content == undefined ? "" : post.content)),
+            __html: xss(marked(post.content === undefined ? "" : post.content)),
           }}
         ></div>
         <Link to="/">목록으로 돌아가기</Link>
