@@ -10,6 +10,9 @@ const theme = createMuiTheme({
     primary: { main: teal[600] },
     secondary: { main: lightBlue[300] },
   },
+  typography: {
+    h1: { fontSize: "4rem" },
+  },
 });
 
 function App() {
