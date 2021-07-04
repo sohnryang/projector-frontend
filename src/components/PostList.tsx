@@ -14,6 +14,7 @@ import MainAppBar from "./MainAppBar";
 import { Post } from "../post";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +82,7 @@ export default function PostList({
               {postList.map((post) => (
                 <TableRow hover key={post.id}>
                   <TableCell component="th" scope="row">
-                    {post.title}
+                    <Link to={"/post/" + post.id}>{post.title}</Link>
                   </TableCell>
                   <TableCell>{post.projectName}</TableCell>
                   <TableCell>{post.authorName}</TableCell>
