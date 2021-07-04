@@ -28,6 +28,11 @@ function App() {
           path="/login"
           render={() => <LoginPage token={token} setToken={setToken} />}
         />
+        <Route
+          render={() =>
+            token === "" ? <Redirect to="/login" /> : <Dashboard />
+          }
+        />
       </Router>
     </ThemeProvider>
   );
