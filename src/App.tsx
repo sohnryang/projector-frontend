@@ -1,18 +1,35 @@
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import { blue, cyan } from "@material-ui/core/colors";
-import MainAppBar from "./components/MainAppBar";
+import { lightBlue, teal } from "@material-ui/core/colors";
+import Dashboard from "./components/Dashboard";
+import React from "react";
+import LoginPage from "./components/LoginPage";
 
 const theme = createMuiTheme({
-  palette: { primary: { main: blue[700] }, secondary: { main: cyan[600] } },
+  palette: {
+    primary: { main: teal[600] },
+    secondary: { main: lightBlue[300] },
+  },
 });
 
 function App() {
+  const [token, setToken] = React.useState("");
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <MainAppBar></MainAppBar>
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Route
+          exact
+          path="/"
+          render={() =>
+            token == "" ? <Redirect to="/login" /> : <Dashboard />
+          }
+        />
+        <Route
+          path="/login"
+          render={() => <LoginPage token={token} setToken={setToken} />}
+        />
+      </Router>
+    </ThemeProvider>
   );
 }
 
