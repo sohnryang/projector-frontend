@@ -168,6 +168,7 @@ export default function EditorView({
           variant="contained"
           color="secondary"
           onClick={handlePostButton}
+          disabled={content === "" || title === "" || projectId === 0}
         >
           Post
         </Button>
