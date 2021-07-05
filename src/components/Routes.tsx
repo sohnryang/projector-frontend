@@ -14,11 +14,16 @@ export default function Routes({
       <Route
         exact
         path="/post/:postId"
-        render={() => <PostView token={token} />}
+        render={() => <PostView token={token} userId={userId} />}
       />
       <Route
         exact
         path="/write"
+        render={() => <EditorView token={token} userId={userId} />}
+      />
+      <Route
+        exact
+        path="/edit/:postId"
         render={() => <EditorView token={token} userId={userId} />}
       />
     </Switch>

@@ -16,8 +16,9 @@ import PropTypes, { InferProps } from "prop-types";
 import React, { useEffect } from "react";
 import { Project } from "../project";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import marked from "marked";
+import xss from "xss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+interface ParamTypes {
+  postId: string;
+}
 
 export default function EditorView({
   token,
@@ -65,6 +70,20 @@ export default function EditorView({
     }
     getAvailableProjects();
   }, [token, userId]);
+  const { postId } = useParams<ParamTypes>();
+  useEffect(() => {
+    if (postId === undefined) return;
+    async function getPostData() {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URI}/post/get/${postId}`,
+        { headers: { Authorization: token } }
+      );
+      setContent(res.data["content"]);
+      setTitle(xss(res.data["title"]));
+      setProjectId(res.data["project_id"]);
+    }
+    getPostData();
+  }, [token, postId]);
   const handleProjectChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -80,15 +99,23 @@ export default function EditorView({
     "write"
   );
   const handlePostButton = () => {
-    axios.post(
-      `${process.env.REACT_APP_API_URI}/post/create`,
-      {
-        title: title,
-        content: content,
-        projectid: projectId,
-      },
-      { headers: { Authorization: token } }
-    );
+    if (postId === undefined) {
+      axios.post(
+        `${process.env.REACT_APP_API_URI}/post/create`,
+        {
+          title: title,
+          content: content,
+          projectid: projectId,
+        },
+        { headers: { Authorization: token } }
+      );
+    } else {
+      axios.put(
+        `${process.env.REACT_APP_API_URI}/post/edit/${postId}`,
+        { title: title, content: content },
+        { headers: { Authorization: token } }
+      );
+    }
     push("/");
   };
   return (
@@ -108,6 +135,7 @@ export default function EditorView({
             variant="filled"
             className={classes.formControl}
             style={{ minWidth: 240 }}
+            disabled={postId !== undefined}
           >
             <InputLabel id="project-select-label">Project</InputLabel>
             <Select

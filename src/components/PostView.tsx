@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(2),
     },
+    formControl: {
+      margin: theme.spacing(1),
+    },
   })
 );
 
@@ -29,6 +32,7 @@ interface ParamTypes {
 
 export default function PostView({
   token,
+  userId,
 }: InferProps<typeof PostView.propTypes>) {
   const classes = useStyles();
   const { postId } = useParams<ParamTypes>();
@@ -44,10 +48,10 @@ export default function PostView({
         id: id,
         title: xss(res.data["title"]),
         projectName: xss(res.data["project_name"]),
-        authorId: res.data["author_id"],
+        authorId: +res.data["author_id"],
         authorName: xss(res.data["author_name"]),
         creationDate: xss(res.data["creation_date"]),
-        content: xss(res.data["content"]),
+        content: res.data["content"],
       });
     }
     getPost();
@@ -66,9 +70,23 @@ export default function PostView({
             __html: xss(marked(post.content === undefined ? "" : post.content)),
           }}
         ></div>
-        <Button variant="contained" onClick={() => push("/")}>
+        <Button
+          className={classes.formControl}
+          variant="contained"
+          onClick={() => push("/")}
+        >
           목록으로 돌아가기
         </Button>
+        {post.authorId === userId ? (
+          <Button
+            className={classes.formControl}
+            variant="contained"
+            color="secondary"
+            onClick={() => push(`/edit/${post.id}`)}
+          >
+            편짐
+          </Button>
+        ) : null}
       </main>
     </>
   );
@@ -76,4 +94,5 @@ export default function PostView({
 
 PostView.propTypes = {
   token: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
