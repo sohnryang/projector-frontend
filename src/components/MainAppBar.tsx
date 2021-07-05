@@ -75,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MainAppBar({
   setToken,
+  setSearchQuery,
 }: InferProps<typeof MainAppBar.propTypes>) {
   const classes = useStyles();
   const { push } = useHistory();
@@ -98,6 +99,11 @@ export default function MainAppBar({
               placeholder="Search..."
               classes={{ root: classes.inputRoot, input: classes.inputInput }}
               inputProps={{ "aria-label": "search" }}
+              onChange={
+                setSearchQuery
+                  ? (event) => setSearchQuery(event.target.value)
+                  : (event) => event.target.value
+              }
             />
           </div>
           <Button color="inherit" onClick={handleLogoutClick}>
@@ -112,4 +118,5 @@ export default function MainAppBar({
 
 MainAppBar.propTypes = {
   setToken: PropType.func.isRequired,
+  setSearchQuery: PropType.func,
 };
