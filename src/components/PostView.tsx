@@ -32,6 +32,7 @@ interface ParamTypes {
 
 export default function PostView({
   token,
+  setToken,
   userId,
 }: InferProps<typeof PostView.propTypes>) {
   const classes = useStyles();
@@ -59,7 +60,7 @@ export default function PostView({
   const { push } = useHistory();
   return (
     <>
-      <MainAppBar />
+      <MainAppBar setToken={setToken} />
       <main className={classes.content}>
         <Typography variant="h1">{post.title}</Typography>
         <Typography variant="subtitle1">
@@ -94,5 +95,6 @@ export default function PostView({
 
 PostView.propTypes = {
   token: PropTypes.string.isRequired,
+  setToken: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
 };

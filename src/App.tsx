@@ -37,7 +37,7 @@ function App() {
             token === "" || userId === 0 ? (
               <Redirect to="/login" />
             ) : (
-              <Routes token={token} userId={userId} />
+              <Routes token={token} setToken={setToken} userId={userId} />
             )
           }
         />

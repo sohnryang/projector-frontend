@@ -10,6 +10,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import PropType, { InferProps } from "prop-types";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,8 +73,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MainAppBar() {
+export default function MainAppBar({
+  setToken,
+}: InferProps<typeof MainAppBar.propTypes>) {
   const classes = useStyles();
+  const { push } = useHistory();
+  const handleLogoutClick = () => {
+    setToken("");
+    push("/login");
+  };
 
   return (
     <>
@@ -91,10 +100,16 @@ export default function MainAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <Button color="inherit">Logout</Button>
+          <Button color="inherit" onClick={handleLogoutClick}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Toolbar />
     </>
   );
 }
+
+MainAppBar.propTypes = {
+  setToken: PropType.func.isRequired,
+};

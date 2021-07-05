@@ -47,6 +47,7 @@ const headCells: HeadCell[] = [
 
 export default function PostList({
   token,
+  setToken,
 }: InferProps<typeof PostList.propTypes>) {
   const [postList, setPostList] = useState([] as Post[]);
   useEffect(() => {
@@ -75,7 +76,7 @@ export default function PostList({
   const { push } = useHistory();
   return (
     <>
-      <MainAppBar />
+      <MainAppBar setToken={setToken} />
       <main className={classes.content}>
         <TableContainer>
           <Table size="medium" aria-label="post list">
@@ -117,4 +118,5 @@ export default function PostList({
 
 PostList.propTypes = {
   token: PropTypes.string.isRequired,
+  setToken: PropTypes.func.isRequired,
 };

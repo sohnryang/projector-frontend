@@ -42,6 +42,7 @@ interface ParamTypes {
 
 export default function EditorView({
   token,
+  setToken,
   userId,
 }: InferProps<typeof EditorView.propTypes>) {
   const classes = useStyles();
@@ -120,7 +121,7 @@ export default function EditorView({
   };
   return (
     <>
-      <MainAppBar />
+      <MainAppBar setToken={setToken} />
       <main className={classes.content}>
         <div className={classes.formContainer}>
           <TextField
@@ -186,5 +187,6 @@ export default function EditorView({
 
 EditorView.propTypes = {
   token: PropTypes.string.isRequired,
+  setToken: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
 };
