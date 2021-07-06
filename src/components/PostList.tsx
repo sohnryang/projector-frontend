@@ -1,6 +1,5 @@
 import {
   createStyles,
-  Fab,
   makeStyles,
   Table,
   TableBody,
@@ -10,7 +9,11 @@ import {
   TableRow,
   Theme,
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
+import CreateIcon from "@material-ui/icons/Create";
+import CollectionsIcon from "@material-ui/icons/Collections";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import ImportExportIcon from "@material-ui/icons/ImportExport";
 import PropTypes, { InferProps } from "prop-types";
 import MainAppBar from "./MainAppBar";
 import { Post } from "../post";
@@ -26,10 +29,16 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(2),
     },
-    fab: {
+    speedDial: {
       position: "absolute",
-      bottom: theme.spacing(3),
-      right: theme.spacing(3),
+      "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
+        bottom: theme.spacing(3),
+        right: theme.spacing(3),
+      },
+      "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
+        top: theme.spacing(3),
+        left: theme.spacing(3),
+      },
     },
   })
 );
@@ -122,8 +131,31 @@ export default function PostList({
     }
     getFilteredPosts();
   }, [token, projectFilters, searchQuery]);
+  const [dialOpen, setDialOpen] = useState(false);
   const classes = useStyles();
   const { push } = useHistory();
+  const dialActions = [
+    {
+      id: "create-cardnews",
+      name: "카드뉴스",
+      icon: <CollectionsIcon />,
+    },
+    {
+      id: "write",
+      name: "일반 게시물",
+      icon: <CreateIcon />,
+    },
+    {
+      id: "import",
+      name: "인트라넷에서 가져오기",
+      icon: <ImportExportIcon />,
+    },
+    {
+      id: "create-projecct",
+      name: "프로젝트 생성",
+      icon: <GroupAddIcon />,
+    },
+  ];
   return (
     <>
       <MainAppBar setToken={setToken} setSearchQuery={setSearchQuery} />
@@ -153,14 +185,25 @@ export default function PostList({
             </TableBody>
           </Table>
         </TableContainer>
-        <Fab
-          className={classes.fab}
-          color="secondary"
-          aria-label="new post"
-          onClick={() => push("/write")}
+        <SpeedDial
+          ariaLabel="create..."
+          FabProps={{ color: "secondary" }}
+          className={classes.speedDial}
+          icon={<SpeedDialIcon />}
+          open={dialOpen}
+          onOpen={() => setDialOpen(true)}
+          onClose={() => setDialOpen(false)}
         >
-          <AddIcon />
-        </Fab>
+          {dialActions.map((action) => (
+            <SpeedDialAction
+              key={action.id}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              tooltipOpen
+              onClick={() => push(`/${action.id}`)}
+            />
+          ))}
+        </SpeedDial>
       </main>
     </>
   );
