@@ -10,7 +10,7 @@ import {
   TableRow,
   Theme,
 } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
 import PropTypes, { InferProps } from "prop-types";
 import MainAppBar from "./MainAppBar";
 import { Post } from "../post";
@@ -159,7 +159,7 @@ export default function PostList({
           aria-label="new post"
           onClick={() => push("/write")}
         >
-          <EditIcon />
+          <AddIcon />
         </Fab>
       </main>
     </>
