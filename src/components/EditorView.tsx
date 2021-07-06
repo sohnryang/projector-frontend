@@ -146,7 +146,9 @@ export default function EditorView({
               onChange={handleProjectChange}
             >
               {availableProjects.map((project) => (
-                <MenuItem value={project.id}>{project.name}</MenuItem>
+                <MenuItem value={project.id} key={project.id}>
+                  {project.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
