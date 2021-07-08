@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Post } from "../post";
 import xss from "xss";
 import marked from "marked";
+import { User } from "../user";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,7 @@ interface ParamTypes {
 export default function PostView({
   token,
   setToken,
-  userId,
+  user,
 }: InferProps<typeof PostView.propTypes>) {
   const classes = useStyles();
   const { postId } = useParams<ParamTypes>();
@@ -78,7 +79,7 @@ export default function PostView({
         >
           목록으로 돌아가기
         </Button>
-        {post.authorId === userId ? (
+        {post.authorId === (user as User).id ? (
           <Button
             className={classes.formControl}
             variant="contained"
@@ -96,5 +97,5 @@ export default function PostView({
 PostView.propTypes = {
   token: PropTypes.string.isRequired,
   setToken: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  user: PropTypes.object.isRequired,
 };

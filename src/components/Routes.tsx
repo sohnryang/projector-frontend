@@ -7,7 +7,7 @@ import PostView from "./PostView";
 export default function Routes({
   token,
   setToken,
-  userId,
+  user,
 }: InferProps<typeof Routes.propTypes>) {
   return (
     <Switch>
@@ -20,21 +20,21 @@ export default function Routes({
         exact
         path="/post/:postId"
         render={() => (
-          <PostView token={token} setToken={setToken} userId={userId} />
+          <PostView token={token} setToken={setToken} user={user} />
         )}
       />
       <Route
         exact
         path="/write"
         render={() => (
-          <EditorView token={token} setToken={setToken} userId={userId} />
+          <EditorView token={token} setToken={setToken} user={user} />
         )}
       />
       <Route
         exact
         path="/edit/:postId"
         render={() => (
-          <EditorView token={token} setToken={setToken} userId={userId} />
+          <EditorView token={token} setToken={setToken} user={user} />
         )}
       />
     </Switch>
@@ -44,5 +44,5 @@ export default function Routes({
 Routes.propTypes = {
   token: PropTypes.string.isRequired,
   setToken: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  user: PropTypes.object.isRequired,
 };

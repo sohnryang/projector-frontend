@@ -4,6 +4,7 @@ import { lightBlue, teal } from "@material-ui/core/colors";
 import Routes from "./components/Routes";
 import React from "react";
 import LoginPage from "./components/LoginPage";
+import { User } from "./user";
 
 const theme = createMuiTheme({
   palette: {
@@ -17,7 +18,7 @@ const theme = createMuiTheme({
 
 function App() {
   const [token, setToken] = React.useState("");
-  const [userId, setUserId] = React.useState(0);
+  const [user, setUser] = React.useState({} as User);
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -27,17 +28,17 @@ function App() {
             <LoginPage
               token={token}
               setToken={setToken}
-              userId={userId}
-              setUserId={setUserId}
+              user={user}
+              setUser={setUser}
             />
           )}
         />
         <Route
           render={() =>
-            token === "" || userId === 0 ? (
+            token === "" || user.id === 0 ? (
               <Redirect to="/login" />
             ) : (
-              <Routes token={token} setToken={setToken} userId={userId} />
+              <Routes token={token} setToken={setToken} user={user} />
             )
           }
         />

@@ -19,6 +19,7 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import marked from "marked";
 import xss from "xss";
+import { User } from "../user";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,7 +44,7 @@ interface ParamTypes {
 export default function EditorView({
   token,
   setToken,
-  userId,
+  user,
 }: InferProps<typeof EditorView.propTypes>) {
   const classes = useStyles();
   const [projectId, setProjectId] = React.useState(0);
@@ -53,7 +54,9 @@ export default function EditorView({
   useEffect(() => {
     async function getAvailableProjects() {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URI}/project/filter-by-user/${userId}`,
+        `${process.env.REACT_APP_API_URI}/project/filter-by-user/${
+          (user as User).id
+        }`,
         {},
         { headers: { Authorization: token } }
       );
@@ -70,7 +73,7 @@ export default function EditorView({
       );
     }
     getAvailableProjects();
-  }, [token, userId]);
+  }, [token, user]);
   const { postId } = useParams<ParamTypes>();
   useEffect(() => {
     if (postId === undefined) return;
@@ -190,5 +193,5 @@ export default function EditorView({
 EditorView.propTypes = {
   token: PropTypes.string.isRequired,
   setToken: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
+  user: PropTypes.object.isRequired,
 };
