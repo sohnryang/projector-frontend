@@ -151,7 +151,7 @@ export default function PostList({
       icon: <ImportExportIcon />,
     },
     {
-      id: "create-projecct",
+      id: "create-project",
       name: "프로젝트 생성",
       icon: <GroupAddIcon />,
     },
