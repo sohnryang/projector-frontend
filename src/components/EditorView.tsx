@@ -104,23 +104,26 @@ export default function EditorView({
   );
   const handlePostButton = () => {
     if (postId === undefined) {
-      axios.post(
-        `${process.env.REACT_APP_API_URI}/post/create`,
-        {
-          title: title,
-          content: content,
-          projectid: projectId,
-        },
-        { headers: { Authorization: token } }
-      );
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URI}/post/create`,
+          {
+            title: title,
+            content: content,
+            projectid: projectId,
+          },
+          { headers: { Authorization: token } }
+        )
+        .then(() => push("/"));
     } else {
-      axios.put(
-        `${process.env.REACT_APP_API_URI}/post/edit/${postId}`,
-        { title: title, content: content },
-        { headers: { Authorization: token } }
-      );
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URI}/post/edit/${postId}`,
+          { title: title, content: content },
+          { headers: { Authorization: token } }
+        )
+        .then(() => push("/"));
     }
-    push("/");
   };
   return (
     <>
