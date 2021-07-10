@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
 import CreateIcon from "@material-ui/icons/Create";
-import CollectionsIcon from "@material-ui/icons/Collections";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
 import PropTypes, { InferProps } from "prop-types";
@@ -135,11 +134,6 @@ export default function PostList({
   const classes = useStyles();
   const { push } = useHistory();
   const dialActions = [
-    {
-      id: "create-cardnews",
-      name: "카드뉴스",
-      icon: <CollectionsIcon />,
-    },
     {
       id: "write",
       name: "일반 게시물",
