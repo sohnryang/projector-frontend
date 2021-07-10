@@ -136,17 +136,17 @@ export default function PostList({
   const dialActions = [
     {
       id: "write",
-      name: "일반 게시물 쓰기",
+      name: "일반\xa0게시물\xa0쓰기",
       icon: <CreateIcon />,
     },
     {
       id: "import",
-      name: "인트라넷에서 가져오기",
+      name: "인트라넷에서\xa0가져오기",
       icon: <ImportExportIcon />,
     },
     {
       id: "create-project",
-      name: "프로젝트 생성",
+      name: "프로젝트\xa0생성",
       icon: <GroupAddIcon />,
     },
   ];
