@@ -47,23 +47,25 @@ export default function LoginPage({
         Projector
       </span>
       <br />
-      <TypeWriter
-        onInit={(typewriter) => {
-          typewriter
-            .typeString("A project site ")
-            .typeString("of HAS students")
-            .pauseFor(2000)
-            .deleteChars(15)
-            .typeString("by HAS student")
-            .pauseFor(2000)
-            .deleteChars(14)
-            .typeString("for HAS students")
-            .pauseFor(2000)
-            .deleteChars(16)
-            .start();
-        }}
-        options={{ loop: true, autoStart: true }}
-      />
+      <div style={{ fontFamily: "sans-serif" }}>
+        <TypeWriter
+          onInit={(typewriter) => {
+            typewriter
+              .typeString("A project site ")
+              .typeString("of HAS students")
+              .pauseFor(2000)
+              .deleteChars(15)
+              .typeString("by HAS student")
+              .pauseFor(2000)
+              .deleteChars(14)
+              .typeString("for HAS students")
+              .pauseFor(2000)
+              .deleteChars(16)
+              .start();
+          }}
+          options={{ loop: true, autoStart: true }}
+        />
+      </div>
       <div style={{ flexShrink: 0, flexGrow: 0, marginTop: "1.5em" }}>
         <GoogleLogin
           clientId="732283162920-fo65na0l33ahj1f02a6qdnhcg3hdq29n.apps.googleusercontent.com"
