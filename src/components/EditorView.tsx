@@ -132,7 +132,7 @@ export default function EditorView({
         <div className={classes.formContainer}>
           <TextField
             className={classes.formControl}
-            label="Title"
+            label="제목"
             variant="filled"
             value={title}
             onChange={handleTitleChange}
@@ -144,7 +144,7 @@ export default function EditorView({
             style={{ minWidth: 240 }}
             disabled={postId !== undefined}
           >
-            <InputLabel id="project-select-label">Project</InputLabel>
+            <InputLabel id="project-select-label">프로젝트</InputLabel>
             <Select
               labelId="project-select-label"
               id="project-select"
@@ -179,14 +179,14 @@ export default function EditorView({
           onClick={handlePostButton}
           disabled={content === "" || title === "" || projectId === 0}
         >
-          Post
+          게시
         </Button>
         <Button
           className={classes.formControl}
           variant="contained"
           onClick={() => push("/")}
         >
-          Cancel
+          취소
         </Button>
       </main>
     </>

@@ -86,7 +86,7 @@ export default function PostView({
             color="secondary"
             onClick={() => push(`/edit/${post.id}`)}
           >
-            편짐
+            편집
           </Button>
         ) : null}
       </main>
